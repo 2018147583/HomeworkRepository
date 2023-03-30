@@ -1,0 +1,64 @@
+.mainstyle {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;     
+    padding-top: 10px;
+    padding-right: 50px;
+    padding-bottom: 5px;
+    padding-left: 50px;
+}
+
+.styleone {
+    background-color: gray;
+    color: black;
+    font-size: 16px;
+    text-align: center;
+    border-style: ridge;
+    width: 542px;
+    height: 23px;
+}
+
+.styletwo {
+    background: rgb(0, 0, 0, 0.2);
+    color: black;
+    margin-top: auto;
+    margin-right: 910px;
+    margin-bottom: auto;
+    margin-left: auto;
+    border-style: double;
+}
+
+.stylethree {
+    text-align:center;
+    margin-top: -12px;
+    margin-right:920px;
+}
+
+.styleonelogin {
+    background-color: gray;
+    color: black;
+    font-size: 16px;
+    text-align: center;
+    border-style: ridge;
+    width: 151px;
+    height: 23px;
+}
+
+.styletwologin {
+    text-align: middle;
+    background: rgb(0, 0, 0, 0.2);
+    color: black;
+    margin-top: auto;
+    margin-right: 1300px;
+    margin-bottom: auto;
+    margin-left: auto;
+    border-style: double;
+}
+
+.stylethreelogin {
+    text-align:center;
+    margin-top: -12px;
+    margin-right:1300px;
+}

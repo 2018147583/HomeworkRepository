@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <title>Internet-Programming Shop</title>
+    <link rel="stylesheet" type = "text/css" href="main.css"/>
+</head>
+<body>
+    <div class="mainstyle">
+        <h1>Welcome to Internet-Programming Shop</h1>
+    </div>
+    <div class="styleone">
+        <a href="login.html">로그인</a>
+        <strong>회원가입</strong>
+    </div>
+    <form method = "GET" action = "www.example.com">
+        <div class="styletwo">
+            <p>
+                <label><strong>이름:</strong> <input name = "name" type = "name" autofocus autocomplete required/> </label>
+            </p>
+            <p>
+                <label><strong>이메일</strong>: <input name = "email" type = "email" placeholder = "name@domain.com" 
+                    autocomplete required /> </label>
+            </p>
+            <p>
+                <label><strong>ID</strong>: <input name = "id" type = "text" autocomplete required /> </label>
+            </p>
+            <p>
+                <label><strong>비밀번호</strong>: <input name = "password" type = "password" required /></label>
+            </p>
+            <p>
+                <label><strong>핸드폰 번호</strong>: <input name = "tel" type = "tel" placeholder = "###-####-####" 
+                    pattern = "\d{3}-\d{4}-\d{4}" required /></label> 예시&rpar; 010-1234-5678
+            </p> 
+            <p>
+                <strong>구매를 희망하는 아이템</strong><br>
+                <label>음식:<input name = "items" type = "checkbox" value = "foods"/></label>
+                <label>화장품:<input name = "items" type = "checkbox" value = "cosmetics"/></label>
+                <label>의류:<input name = "items" type = "checkbox" value = "clothes"/></label>
+                <label>전자기기:<input name = "items" type = "checkbox" value = "electronicsc"/></label>
+                <label>책:<input name = "items" type = "checkbox" value = "books"/></label>
+            </p>
+            <p>
+                <strong>어떻게 알고 오셨나요?</strong><br>
+                <label>검색<input name = "how" type = "radio" value = "search" checked/></label>
+                <label>지인소개<input name = "how" type = "radio" value = "friends" /></label>
+                <label>블로그<input name = "how" type = "radio" value = "blog" /></label>
+                <label>인스타그램<input name = "how" type = "radio" value = "instagram" /></label>
+                <label>트위터<input name = "how" type = "radio" value = "tv" /></label>
+            </p>
+            <p>
+                <strong>언제 배송받고 싶으신가요?</strong><br>
+                <label>배송시간: <input name = "deliveryTime" type = "time" min = "09:00" max = "21:00" 
+                    step = "900" required/> (배송시간은 오전 9시부터 오후 9시 사이로 설정해주세요!)</label>
+            </p>
+        </div>
+        <div class="stylethree">
+            <p>
+                <input type = "submit" value = "회원가입" />
+                <input type = "reset" value = "초기화" />
+            </p>
+        </div>
+    </form> 
+</body>
