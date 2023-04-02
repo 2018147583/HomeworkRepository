@@ -50,10 +50,7 @@
     text-align: middle;
     background: rgb(0, 0, 0, 0.2);
     color: black;
-    margin-top: auto;
-    margin-right: 1300px;
-    margin-bottom: auto;
-    margin-left: auto;
+    width: 151px;
     border-style: double;
 }
 
