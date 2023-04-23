@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<html class = "backgroundc">
+    <head>
+        <title>Internet-Programming Shop</title>
+        <link rel="stylesheet" type = "text/css" href="main.css"/>
+    </head>
+    <body>
+        <h2>해주네 과일가게 회원가입</h2>
+        <a href="login.html">로그인</a>
+        <a href="index.html">홈페이지</a>   
+        <form method = "GET" action = "www.example.com">
+            <p>
+                <label><strong>이름:</strong> <input name = "name" type = "name" autofocus autocomplete required/> </label>
+            </p>
+            <p>
+                <label><strong>이메일</strong>: <input name = "email" type = "email" placeholder = "name@domain.com" 
+                    autocomplete required /> </label>
+            </p>
+            <p>
+                <label><strong>ID</strong>: <input name = "id" type = "text" autocomplete required /> </label>
+            </p>
+            <p>
+                <label><strong>비밀번호</strong>: <input name = "password" type = "password" required /></label>
+            </p>
+            <p>
+                <label><strong>핸드폰 번호</strong>: <input name = "tel" type = "tel" placeholder = "###-####-####" 
+                    pattern = "\d{3}-\d{4}-\d{4}" required /></label> 예시&rpar; 010-1234-5678
+            </p> 
+            <p>
+                <strong>어떻게 알고 오셨나요?</strong><br>
+                <label>검색<input name = "how" type = "radio" value = "search" checked/></label>
+                <label>지인소개<input name = "how" type = "radio" value = "friends" /></label>
+                <label>블로그<input name = "how" type = "radio" value = "blog" /></label>
+                <label>인스타그램<input name = "how" type = "radio" value = "instagram" /></label>
+                <label>트위터<input name = "how" type = "radio" value = "tv" /></label>
+            </p>
+            <p>
+                <strong>언제 배송받고 싶으신가요?</strong><br>
+                <label>배송시간: <input name = "deliveryTime" type = "time" min = "09:00" max = "21:00" 
+                    step = "900" required/> (배송시간은 오전 9시부터 오후 9시 사이로 설정해주세요!)</label>
+            </p>
+            <p>
+                <input type = "submit" value = "회원가입" />
+                <input type = "reset" value = "초기화" />
+            </p>
+        </form> 
+    </body>
+</html>
