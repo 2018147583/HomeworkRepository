@@ -1,0 +1,28 @@
+[
+    {"name": "Apple", "price": 1520, "img": "apple.jpg", "type": "Sweet"},
+    {"name": "Envy Apple", "price": 50000, "img": "eapple.jpg", "type": "Sweet"},
+    {"name": "Strawberry", "price": 2770, "img": "straw.jpg", "type": "Sour"},
+    {"name": "Watermelon", "price": 3050, "img": "waterm.jpg", "type": "Sweet"},
+    {"name": "Cherry", "price": 3000, "img": "cherry.jpg", "type": "Sour"},
+    {"name": "Pineapple", "price": 7200, "img": "pineapple.jpg", "type": "Sour"},
+    {"name": "Lemon", "price": 1250, "img": "lemon.jpg", "type": "Sour"},
+    {"name": "Banana", "price": 2230, "img": "banana.jpg", "type": "Sweet"},
+    {"name": "Plum", "price": 5220, "img": "plum.jpg", "type": "Sour"},
+    {"name": "Orange", "price": 3740, "img": "orange.jpg", "type": "Sour"},
+    {"name": "tangerine", "price": 7450, "img": "tangerine.jpg", "type": "Sour"},
+    {"name": "pear", "price": 7260, "img": "pear.jpg", "type": "Sweet"},
+    {"name": "kiwi", "price": 8210, "img": "kiwi.jpg", "type": "Sour"},
+    {"name": "Goldenkiwi", "price": 3280, "img": "goldenkiwi.jpg", "type": "Sweet"},
+    {"name": "Melon", "price": 5310, "img": "melon.jpg", "type": "Sweet"},
+    {"name": "Peach", "price": 6230, "img": "peach.jpg", "type": "Sweet"},
+    {"name": "Tomato", "price": 12300, "img": "tomato.jpg", "type": "Sour"},
+    {"name": "Apricot", "price": 2480, "img": "apricot.jpg", "type": "Sweet"},
+    {"name": "Grape", "price": 5800, "img": "grape.jpg", "type": "Sweet"},
+    {"name": "Mango", "price": 5830, "img": "mango.jpg", "type": "Sweet"},
+    {"name": "Lichy", "price": 6050, "img": "lichy.jpg", "type": "Sour"},
+    {"name": "Raspberry", "price": 6080, "img": "raspberry.jpg", "type": "Sour"},
+    {"name": "Papaya", "price": 8350, "img": "papaya.jpg", "type": "Sweet"},
+    {"name": "Grapefruit", "price": 2850, "img": "grapefruit.jpg", "type": "Sour"}
+]
+
+
