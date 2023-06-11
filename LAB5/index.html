@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title>HJ's Fruit E-Commerce</title>
+    <link href="main.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <h1>HJ's Fruit E-Commerce</h1>
+      <h3><a href="login.html">로그인</a> <a href="signup.html">회원가입</a></h3>
+    </header>
+    <div>
+      <aside>
+        <form>
+          <div class="container">
+            <label for="category">Category:</label>
+            <select id="category">
+              <option value="All">All</option>
+              <option value="Sweet">Sweet</option>
+              <option value="Sour">Sour</option>
+            </select>
+          </div>
+          <div>
+            <label for="search">Search:</label>
+            <input type="text" id="search" placeholder="e.g. apple">
+          </div>
+          <div>
+            <label for="sort">Sort by:</label>
+            <select id="sort">
+              <option value="price-asc">Price (Low to High)</option>
+              <option value="price-desc">Price (High to Low)</option>
+            </select>
+          </div>
+          <div>
+            <button>Confirm</button>
+          </div>
+        </form>
+      </aside>
+      <main>
+      </main>
+    </div>
+    <footer>
+      <p>About HJ's E-Commerce:</p>
+      <ul>
+        <li>Contact: 010-1234-5678</li>
+        <li>Email: hj119@ecom.com</li>
+        <li>Fruits from. South Korea</li>
+      </ul>
+    </footer>
+    <script>
+      let displayedProductsCount = 4;
+      const increment = 4;
+
+      let xhr = new XMLHttpRequest();
+      xhr.open('GET', '/products', true);
+      xhr.responseType = 'json';
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          console.log('JSON fetched!');
+          initializeApp(xhr.response);
+        } else {
+          console.error('Fetch problem: ' + xhr.status);
+        }
+      };
+      xhr.onerror = function() {
+        console.error('Fetch problem: ' + xhr.status);
+      };
+      xhr.send();
+
+      function initializeApp(products) {
+        console.log('In initializeApp function.');
+
+        const categoryDropdown = document.querySelector('#category');
+        const searchInput = document.querySelector('#search');
+        const sortDropdown = document.querySelector('#sort');
+        const confirmButton = document.querySelector('button');
+        const mainSection = document.querySelector('main');
+
+        let lastCategory = categoryDropdown.value;
+        let lastSearch = '';
+        let lastSort = sortDropdown.value;
+
+        let categoryProducts;
+        let filteredProducts;
+
+        filteredProducts = products;
+
+        confirmButton.addEventListener('click', selectCategory);
+
+        function selectCategory(e) {
+          e.preventDefault();
+
+          categoryProducts = [];
+          filteredProducts = [];
+
+          if (
+            categoryDropdown.value === lastCategory &&
+            searchInput.value.trim() === lastSearch &&
+            sortDropdown.value === lastSort
+          ) {
+            return;
+          } else {
+            lastCategory = categoryDropdown.value;
+            lastSearch = searchInput.value.trim();
+            lastSort = sortDropdown.value;
+
+            if (categoryDropdown.value === 'All') {
+              categoryProducts = products;
+              selectProducts();
+            } else {
+              const lowerCaseType = categoryDropdown.value.toLowerCase();
+              categoryProducts = products.filter(
+                product => product.product_category.toLowerCase() === lowerCaseType
+              );
+
+              selectProducts();
+            }
+          }
+        }
+
+        function selectProducts() {
+          if (searchInput.value.trim() === '') {
+            filteredProducts = categoryProducts;
+          } else {
+            const lowerCaseSearch = searchInput.value.trim().toLowerCase();
+            filteredProducts = categoryProducts.filter(product =>
+              product.product_title.toLowerCase().includes(lowerCaseSearch)
+            );
+          }
+
+          const sortOption = sortDropdown.value;
+          switch (sortOption) {
+            case 'price-asc':
+              filteredProducts.sort((a, b) => parseFloat(a.product_price) - parseFloat(b.product_price));
+              break;
+            case 'price-desc':
+              filteredProducts.sort((a, b) => parseFloat(b.product_price) - parseFloat(a.product_price));
+              break;
+            default:
+              break;
+          }
+
+          fetchAllImagesAndUpdateDisplay();
+        }
+
+        function fetchAllImagesAndUpdateDisplay() {
+          const displayedProducts = filteredProducts.slice(0, displayedProductsCount);
+
+          const imageFetchPromises = displayedProducts.map(product => {
+            const imageUrl = `images/${product.product_image}`;
+
+            return fetch(imageUrl)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(`HTTP error: ${response.status}`);
+                }
+                return response.blob();
+              })
+              .then(blob => ({ blob, product }))
+              .catch(err => console.error(`Fetch problem: ${err.message}`));
+          });
+
+          Promise.all(imageFetchPromises)
+            .then(results => {
+              while (mainSection.firstChild) {
+                mainSection.removeChild(mainSection.firstChild);
+              }
+
+              if (results.length === 0) {
+                const para = document.createElement('p');
+                para.textContent = 'No results to display!';
+                mainSection.appendChild(para);
+              } else {
+                for (const result of results) {
+                  showProduct(result.blob, result.product);
+                }
+              }
+
+              window.addEventListener('scroll', () => {
+                if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+                  displayedProductsCount += increment;
+                  fetchAllImagesAndUpdateDisplay();
+                }
+              });
+            });
+        }
+
+        function showProduct(blob, product) {
+          const objectURL = URL.createObjectURL(blob);
+          const productSection = document.createElement('section');
+          const heading = document.createElement('h2');
+          const imageContainer = document.createElement('div');
+          const image = document.createElement('img');
+          const overlay = document.createElement('div');
+          const overlayText = document.createElement('p');
+
+          productSection.setAttribute('class', product.product_category);
+
+          heading.textContent = product.product_title.replace(
+            product.product_title.charAt(0),
+            product.product_title.charAt(0).toUpperCase()
+          );
+
+          image.src = objectURL;
+          image.alt = product.alt;
+
+          productSection.addEventListener('click', () => {
+            const productURL = `http://localhost:3000/product/${product.product_id}`;
+            window.location.href = productURL;
+          });
+
+
+          overlayText.classList.add('overlay-text');
+          overlay.appendChild(overlayText);
+          imageContainer.appendChild(image);
+          imageContainer.appendChild(overlay);
+          productSection.appendChild(heading);
+          productSection.appendChild(imageContainer);
+          mainSection.appendChild(productSection);
+        }
+
+        fetchAllImagesAndUpdateDisplay();
+      }
+    </script>
+  </body>
+</html>

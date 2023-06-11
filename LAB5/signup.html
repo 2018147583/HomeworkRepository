@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<html class = "backgroundc">
+    <head>
+        <title>HJ's E-Commerce</title>
+        <link rel="stylesheet" type = "text/css" href="main.css"/>
+    </head>
+    <body>
+        <h2>HJ's E-Commerce</h2>
+        <h3><a href="login.html">로그인</a> <a href="index.html">홈페이지</a></h3>   
+        <form method = "GET" action = "www.example.com">
+            <p>
+                <label><strong>이름:</strong> <input name = "name" type = "name" autofocus autocomplete required/> </label>
+            </p>
+            <p>
+                <label><strong>이메일</strong>: <input name = "email" type = "email" placeholder = "name@domain.com" 
+                    autocomplete required /> </label>
+            </p>
+            <p>
+                <label><strong>ID</strong>: <input name = "id" type = "text" autocomplete required /> </label>
+            </p>
+            <p>
+                <label><strong>비밀번호</strong>: <input name = "password" type = "password" required /></label>
+            </p>
+            <p>
+                <label><strong>핸드폰 번호</strong>: <input name = "tel" type = "tel" placeholder = "###-####-####" 
+                    pattern = "\d{3}-\d{4}-\d{4}" required /></label> 예시&rpar; 010-1234-5678
+            </p> 
+            <p>
+                <strong>언제 배송받고 싶으신가요?</strong><br>
+                <label>배송시간: <input name = "deliveryTime" type = "time" min = "09:00" max = "21:00" 
+                    step = "900" required/> (배송시간은 오전 9시부터 오후 9시 사이로 설정해주세요!)</label>
+            </p>
+            <br>
+            <p>
+                <input type = "submit" value = "회원가입" /> <br>
+                <input type = "reset" value = "초기화" />
+            </p>
+        </form> 
+    </body>
+</html>

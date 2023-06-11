@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <title>Product Page</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+    <div>
+        <aside id="product-reviews">
+            <h5><a href="http://localhost:3000">메인페이지</a></h5>
+            <form id="review-form">
+                <label for="review">Review:</label><br>
+                <textarea id="review" name="review" required></textarea><br>
+                <input type="submit" value="Submit">
+            </form>
+            <table id="comments-table">
+                <tr>
+                    <th>Comments</th>
+                </tr>
+            </table>
+        </aside>
+        <main>
+            <section>
+                <h2 id="product-title"></h2>
+                <img id="product-image" src="" alt="">
+                <p id="product-id"></p>
+                <p id="product-price"></p>
+                <p id="product-category"></p>
+            </section>
+
+            <script>
+                document.getElementById('review-form').addEventListener('submit', event => {
+                    event.preventDefault();
+                    const review = document.getElementById('review').value;
+                    document.getElementById('review').value = '';
+
+                    const productId = window.location.pathname.split('/').pop();
+
+                    fetch('/comment', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ productId, review }),
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            fetchComments();
+                        } else {
+                            console.error('Failed to save comment:', response.status);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Failed to save comment:', error);
+                    });
+                });
+
+                function fetchComments() {
+                    const productId = window.location.pathname.split('/').pop();
+
+                    fetch(`/comment?productId=${productId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch comments');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data) {
+                            const comments = data;
+                            const tableElement = document.getElementById('comments-table');
+                            let commentsHTML = '';
+
+                            comments.forEach(comment => {
+                                commentsHTML += `
+                                <tr>
+                                    <td>${comment}</td>
+                                </tr>
+                                `;
+                            });
+
+                            tableElement.innerHTML = commentsHTML;
+                        } else {
+                            console.error('Empty comment data');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Failed to fetch comments:', error);
+                    });
+                }
+                fetchComments();
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const productId = window.location.pathname.split('/').pop();
+                    const xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', `/api/product/${productId}`, true);
+                    xhr.responseType = 'json';
+
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            const product = xhr.response;
+                            const productTitle = document.getElementById('product-title');
+                            const productImage = document.getElementById('product-image');
+                            const productPrice = document.getElementById('product-price');
+                            const productID = document.getElementById('product-id');
+                            const productCategory = document.getElementById('product-category');
+
+                            productTitle.textContent = product.product_title;
+                            productImage.src = `/images/${product.product_image}`;
+                            productImage.alt = product.product_title;
+                            productID.textContent = `Product ID: ${product.product_id}`;
+                            productPrice.textContent = `Product Price: $${product.product_price}`;
+                            productCategory.textContent = `Product Category: ${product.product_category}`;
+                        } else {
+                            console.error('Request failed. Status:', xhr.status);
+                        }
+                    };
+
+                    xhr.onerror = function() {
+                        console.error('Request failed. An error occurred.');
+                    };
+
+                    xhr.send();
+                });
+            </script>
+        </main>
+    </div>
+</body>
+</html>
